@@ -11,9 +11,9 @@
   tasks:
     - name: Install the utils package
       ansible.builtin.yum:
-        name: yum-utils
+        name: -y yum-utils
         state: latest
-        
+
     - name: Add repository
       ansible.builtin.yum_repository:
         name: docker
