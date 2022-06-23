@@ -1,0 +1,44 @@
+---
+
+-
+
+ hosts: redhat
+  
+  vars:
+    container_count: 4
+    default_container_name: sapient 
+    default_container_image: gopal1409/chatapp
+    default_container_command: sleep 1
+  tasks:
+    - name: Install the utils package
+      ansible.builtin.yum:
+        name: yum-utils
+        state: latest
+
+    - name: Add repository
+      ansible.builtin.yum_repository:
+        name: docker
+        description: Docker repo
+        baseurl: https://download.docker.com/linux/rhel/docker-ce.repo
+
+    - name: Install Docker Engine
+      ansible.builtin.yum:
+        name: docker-ce
+        state: latest  
+        update_cache: true  
+   
+    - name: Start docker service
+      ansible.builtin.service:
+        name: docker
+        state: started
+        
+    - name: download the docker image
+      docker_image:
+        name: "{{default_container_image}}"
+        source: pull 
+    - name: run the docker container 
+      docker_container:
+        name: "{{default_container_name}}{{item}}"
+        image: "{{default_container_image}}"
+        command: "{{default_container_command}}"
+      with_sequence: count={{container_count}}    
