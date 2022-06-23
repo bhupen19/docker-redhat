@@ -16,7 +16,7 @@
         name: docker
         description: Docker repo
         baseurl: https://download.docker.com/linux/rhel/docker-ce.repo
-        update_cache: true
+        
 
     - name: Install Docker Engine
       ansible.builtin.yum:
