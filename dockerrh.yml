@@ -3,8 +3,7 @@
 -
 
  hosts: redhat
-  
-  vars:
+ vars:
     container_count: 4
     default_container_name: sapient 
     default_container_image: gopal1409/chatapp
@@ -31,7 +30,7 @@
       ansible.builtin.service:
         name: docker
         state: started
-        
+
     - name: download the docker image
       docker_image:
         name: "{{default_container_image}}"
