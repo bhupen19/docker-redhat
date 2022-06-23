@@ -2,8 +2,8 @@
 
 -
 
- hosts: redhat
- vars:
+  hosts: redhat
+  vars:
     container_count: 4
     default_container_name: sapient 
     default_container_image: gopal1409/chatapp
